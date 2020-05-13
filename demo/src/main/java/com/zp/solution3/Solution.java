@@ -1,8 +1,10 @@
-package com.zp;
+package com.zp.solution3;
+
+import java.util.Stack;
 
 /**
  * @author 80000Chow
- * @date 2020/5/13 14:48
+ * @date 2020/5/13 17:41
  * //
  * //                            _ooOoo_
  * //                           o8888888o
@@ -25,10 +27,42 @@ package com.zp;
  * //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  * //                     Buddha Bless, No Bug !
  */
-public class myClass {
-    public static void main(String args[]){
-        System.out.println("hello");
+public class Solution {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+
+    public void push(int node) {
+        stack1.push(node);
     }
 
-    
+    public int pop() {
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+        }
+        int first = stack2.pop();
+        while(!stack2.isEmpty()){
+            stack1.push(stack2.pop());
+        }
+        return first;
+    }
+
+    public int peek() {
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+        }
+        int first = stack2.pop();
+        stack2.push(first);
+        while(!stack2.isEmpty()){
+            stack1.push(stack2.pop());
+        }
+        return first;
+    }
+
+    public boolean isEmpty() {
+        if(stack1.isEmpty() && stack2.isEmpty()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
